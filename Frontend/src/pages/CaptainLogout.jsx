@@ -1,29 +1,24 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const UserLogout = () => {
+const CaptainLogout = () => {
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
-useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/users/logout`,{
+    axios.get(`${import.meta.env.VITE_BASE_URL}/captains/logout`,{
         headers : {
             Authorization : `Bearer ${token}`
         }
     }).then((response) => {
         if(response.status === 200) {
             localStorage.removeItem('token');
-            navigate('/login');
+            navigate('/captain-login');
         }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
-
-
   return (
-    <div>UserLogout</div>
+    <div>CaptainLogout</div>
   )
 }
 
-export default UserLogout
+export default CaptainLogout
